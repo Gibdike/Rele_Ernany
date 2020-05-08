@@ -11,10 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gerenciador de Ar Condicionado',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-      ),
+      theme: ThemeData.dark(),
       home: HomePage(),
     );
   }
