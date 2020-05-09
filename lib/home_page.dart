@@ -12,11 +12,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _logController.startScan();
+//    _logController.startScan();
   }
 
   @override
   void dispose() {
+//    _logController.targetDevice.disconnect();
     super.dispose();
   }
 
@@ -60,12 +61,25 @@ class _HomePageState extends State<HomePage> {
               child: const Text("Enviar dados"),
             ),
           ),
+          SizedBox(height: 30),
+          Center(
+            child: RaisedButton(
+              onPressed: _desconnect,
+              child: const Text("Desconectar"),
+            ),
+          ),
         ],
       ),
     );
   }
 
   void _sendData() {
-    _logController.writeData("OLÀ CARAZINHO");
+    print("Enviando dado...");
+//    _logController.writeData("OLÀ CARAZINHO");
+  }
+
+  void _desconnect() {
+    print("Deconectando...");
+//    _logController.disconnectFromDevice();
   }
 }

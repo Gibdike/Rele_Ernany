@@ -16,12 +16,29 @@ class LogController extends Bloc<String> {
   BluetoothDevice targetDevice;
   BluetoothCharacteristic targetCharacteristic;
 
+  @override
+  add(String object) {
+    streamController.add(object);
+  }
+
+  @override
+  addError(Object error) {
+    streamController.addError(error);
+  }
+
+  @override
+  Stream get stream => streamController.stream;
+
   startScan() {
-    scanSubscription = flutterBlue.scan().listen((scanResult) {
+    scanSubscription = flutterBlue.scan(timeout: Duration(seconds: 5)).listen((scanResult) {
       print("NOME: ${scanResult.device.name}");
       if (scanResult.device.name == TARGET_DEVICE_NAME) {
         stopScan();
         add("O dispositivo ${scanResult.device.name} foi encontrado");
+        print(">>> ${scanResult.device.toString()}");
+        print(">>> ${scanResult.device.id}");
+        print(">>> ${scanResult.advertisementData.toString()}");
+        print(">>> ${scanResult.rssi}");
         targetDevice = scanResult.device;
         connectToDevice();
       }
@@ -42,18 +59,18 @@ class LogController extends Bloc<String> {
   }
 
   disconnectFromDevice() {
-    if(targetDevice == null ) return;
+    if (targetDevice == null) return;
     targetDevice.disconnect();
     add("Dispositivo ${targetDevice.name} foi desconectado");
     print("Dispositivo ${targetDevice.name} foi desconectado");
   }
 
   discoverServices() async {
-    if(targetDevice == null ) return;
-    List<BluetoothService> services = await targetDevice.discoverServices();
+    if (targetDevice == null) return;
+    final services = await targetDevice.discoverServices();
     services.forEach((service) {
-      if(service.uuid.toString() == SERVICE_UUID) {
-        service.characteristics.forEach((characteristic){
+      if (service.uuid.toString() == SERVICE_UUID) {
+        service.characteristics.forEach((characteristic) {
           if (characteristic.uuid.toString() == CHARACTERISTIC_UUID) {
             targetCharacteristic = characteristic;
             add("Servicos do dispositivo ${targetDevice.name} estão pronto!");
@@ -65,7 +82,7 @@ class LogController extends Bloc<String> {
   }
 
   writeData(String data) async {
-    if(targetDevice == null) return;
+    if (targetDevice == null) return;
     List<int> bytes = utf8.encode(data);
     add("Enviando dados...");
     print("Enviando dados...");

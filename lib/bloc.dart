@@ -1,18 +1,13 @@
 import 'dart:async';
 
-class Bloc<T> {
+abstract class Bloc<T>{
   final _controller = StreamController<T>();
 
-  Stream get stream => _controller.stream;
+  StreamController<T> get streamController => _controller;
 
-  add(T object) {
-    _controller.add(object);
-  }
-
-  addError(Object error) {
-    _controller.addError(error);
-  }
-
+  Stream get stream;
+  add(T object);
+  addError(Object error);
   void dispose() {
     _controller.close();
   }
