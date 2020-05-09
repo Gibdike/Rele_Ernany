@@ -1,5 +1,5 @@
 import 'package:controle_bluetooth/bluetoothDesabilitado.dart';
-import 'package:controle_bluetooth/home_page.dart';
+import 'package:controle_bluetooth/home.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
