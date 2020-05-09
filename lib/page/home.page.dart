@@ -1,4 +1,6 @@
-import 'package:controle_bluetooth/deviceList.widget.dart';
+import 'package:controle_bluetooth/page/device_details.page.dart';
+import 'package:controle_bluetooth/utils/nav.utils.dart';
+import 'package:controle_bluetooth/widget/device_list.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
@@ -12,12 +14,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     FlutterBlue.instance.startScan(timeout: Duration(seconds: 3));
     super.initState();
-//    _logController.startScan();
   }
 
   @override
   void dispose() {
-//    _logController.targetDevice.disconnect();
     super.dispose();
   }
 
@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
           builder: (_, snapshot) {
             return snapshot.data
                 ? Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : _body();
           },
         ),
@@ -80,19 +80,21 @@ class _HomePageState extends State<HomePage> {
               if (snapshot.hasData) {
                 return Column(
                   children: snapshot.data
-                      .map((device) =>
-                      DeviceList(
-                        data: device,
-                        onTap: () {},
-                      ))
+                      .map((data) => DeviceList(
+                            data: data,
+                            onTap: () => push(
+                              context,
+                              DeviceDetails(device: data.device),
+                            ),
+                          ))
                       .toList(),
                 );
               }
               return Center(
                   child: Text(
-                    'Nenhum dispositivo encontrado',
-                    style: TextStyle(color: Colors.red, fontSize: 18),
-                  ));
+                'Nenhum dispositivo encontrado',
+                style: TextStyle(color: Colors.red, fontSize: 18),
+              ));
             },
           ),
         ],

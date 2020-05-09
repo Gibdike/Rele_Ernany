@@ -10,9 +10,9 @@ environment:
 
 dependencies:
   flutter_blue: ^0.7.2
+  intl: 0.16.1
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^0.1.3
 

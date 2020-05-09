@@ -1,5 +1,5 @@
-import 'package:controle_bluetooth/bluetoothDesabilitado.dart';
-import 'package:controle_bluetooth/home.page.dart';
+import 'package:controle_bluetooth/page/bluetooth_disable.page.dart';
+import 'package:controle_bluetooth/page/home.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           if (state == BluetoothState.on)
             return HomePage();
           else
-            return BluetoothDesabilitado();
+            return BluetoothDisable();
         },
       ),
     );

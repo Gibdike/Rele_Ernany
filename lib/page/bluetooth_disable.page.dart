@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-class BluetoothDesabilitado extends StatelessWidget {
-  const BluetoothDesabilitado({Key key, this.state}) : super(key: key);
+class BluetoothDisable extends StatelessWidget {
+  const BluetoothDisable({Key key, this.state}) : super(key: key);
 
   final BluetoothState state;
 
