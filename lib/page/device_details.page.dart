@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:controle_bluetooth/bloc/log.bloc.dart';
 import 'package:controle_bluetooth/service/bluetooth_device.service.dart';
+import 'package:controle_bluetooth/service/communication_protocol_impl.dart';
+import 'package:controle_bluetooth/service/communicaton_protocol.dart';
 import 'package:controle_bluetooth/utils/dropdown_temperature.utils.dart';
 import 'package:controle_bluetooth/widget/loading_page.widget.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     currentTemperature = dropdownTemperature[0].value;
 
     // inicializa servico de bluetooth
-    _service = BluetoothDeviceService(device, _updateLog);
+    _service = BluetoothDeviceService(CommunicationProtocolImpl(), device, _updateLog);
     _service.connectToDevice();
     super.initState();
   }
@@ -127,7 +129,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
       _ligarAr = newValue;
     });
     _updateLog('Comando para ligar ar $_ligarAr');
-    _service.sendData(_ligarAr.toString());
+    _service.sendData(CommandType.air, _ligarAr.toString());
   }
 
   _selectTemperature(int newTemperature) {
@@ -136,7 +138,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     });
     _updateLog('Temperatura selecionada:$currentTemperature');
     _updateLog('Enviando para o servidor');
-    _service.sendData(currentTemperature.toString());
+    _service.sendData(CommandType.temperature, currentTemperature.toString());
   }
 
   Expanded _logDisplay() {
