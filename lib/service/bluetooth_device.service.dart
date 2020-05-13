@@ -14,7 +14,7 @@ class BluetoothDeviceService {
 
   BluetoothDeviceService(this._protocol, this._device, this._updateLog);
 
-  connectToDevice() async {
+  connectToDevice(Function error) async {
     if (_device == null) {
       _updateLog('Objeto device está nulo');
       return;
@@ -23,6 +23,7 @@ class BluetoothDeviceService {
     _updateLog("Conectando....");
     await _device.connect(timeout: Duration(seconds: 10)).catchError((error) {
       print('$error: ${_device.state}');
+      return error();
     });
     discoverServices();
   }
