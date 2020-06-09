@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
         initialData: BluetoothState.unknown,
         builder: (_, snapshot) {
           final state = snapshot.data;
+          /* Se o bluetooth do aparelho não estiver ativado,
+          * mostra uma tela de aviso. A tela só sofrerá alteração
+          * caso o bluetooth seja ativado
+          * */
           if (state == BluetoothState.on)
             return HomePage();
           else

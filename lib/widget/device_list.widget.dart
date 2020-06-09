@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
+/*
+* Widget que fornece uma lista de dispositivos scaneados,
+* informa o seu nome, MAC, taxa de transmissão
+* */
 class DeviceList extends StatelessWidget {
   const DeviceList({this.data, this.onTap});
 

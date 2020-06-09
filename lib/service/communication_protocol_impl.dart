@@ -10,6 +10,10 @@ class CommunicationProtocolImpl implements CommunicationProtocol{
   @override
   String encode(String nome, CommandType type, String data) {
     var _data = convertData(type, data);
+    /*
+    * protocolo de comunicação com o esp32,
+    * tipoDoComando!nomeDoDispositivo!dado
+    * */
     var msg = 'rt' + '!' + nome + '!' + _data;
     return msg;
   }
