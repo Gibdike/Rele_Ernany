@@ -43,8 +43,12 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     currentTemperature = dropdownTemperature[0].value;
 
     // inicializa servico de bluetooth
-    _service = BluetoothDeviceService(CommunicationProtocolImpl(), device, _updateLog);
-    _service.connectToDevice();
+    _service = BluetoothDeviceService(
+      CommunicationProtocolImpl(),
+      device,
+      _updateLog,
+    );
+    _service.connectToDevice(_pop);
     super.initState();
   }
 
@@ -76,7 +80,8 @@ class _DeviceDetailsState extends State<DeviceDetails> {
             if (snapshot.data == BluetoothDeviceState.connected) {
               return _body();
             }
-            return LoadingPage(msg: 'Tentando conectar-se ao dispositivo ${device.name}');
+            return LoadingPage(
+                msg: 'Tentando conectar-se ao dispositivo ${device.name}');
           },
         ),
       ),
@@ -156,7 +161,8 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                 itemBuilder: (context, index) {
                   Timer(
                     Duration(seconds: 1),
-                        () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent),
+                    () => _scrollController
+                        .jumpTo(_scrollController.position.maxScrollExtent),
                   );
                   return Text(list[index]);
                 },
@@ -172,9 +178,12 @@ class _DeviceDetailsState extends State<DeviceDetails> {
       builder: (context) =>
           new AlertDialog(
             title: Text('Tem certeza?'),
-            content: Text('Você quer desconectar do dispositivo e voltar para o menu?'),
+            content: Text(
+                'Você quer desconectar do dispositivo e voltar para o menu?'),
             actions: <Widget>[
-              new FlatButton(onPressed: () => Navigator.of(context).pop(false), child: Text('Não')),
+              new FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text('Não')),
               new FlatButton(
                 onPressed: () {
                   _service.disconnectFromDevice();
