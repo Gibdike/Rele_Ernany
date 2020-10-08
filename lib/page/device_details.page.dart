@@ -108,18 +108,10 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                 ),
                 Divider(),
                 SwitchListTile.adaptive(
-                  title: Text('Ligar ar condicionado'),
+                  title: Text('Ligar relé'),
                   value: _ligarAr,
                   onChanged: switchTileOnChanged,
                 ),
-                ListTile(
-                  leading: Text('Selecione a temperatura'),
-                  trailing: DropdownButton(
-                    value: currentTemperature,
-                    items: dropdownTemperature,
-                    onChanged: _selectTemperature,
-                  ),
-                )
               ],
             ),
           ),
@@ -133,17 +125,8 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     setState(() {
       _ligarAr = newValue;
     });
-    _updateLog('Comando para ligar ar $_ligarAr');
+    _updateLog('Comando para ligar relé $_ligarAr');
     _service.sendData(CommandType.air, _ligarAr.toString());
-  }
-
-  _selectTemperature(int newTemperature) {
-    setState(() {
-      currentTemperature = newTemperature;
-    });
-    _updateLog('Temperatura selecionada:$currentTemperature');
-    _updateLog('Enviando para o servidor');
-    _service.sendData(CommandType.temperature, currentTemperature.toString());
   }
 
   Expanded _logDisplay() {

@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gerenciador de Ar Condicionado',
+      title: 'Gerenciador Relé',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: StreamBuilder<BluetoothState>(

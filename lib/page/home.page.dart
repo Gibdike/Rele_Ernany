@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Controle de ar condicionado"),
+          title: Text("Controle do Relé"),
         ),
         body: StreamBuilder<bool>(
           stream: FlutterBlue.instance.isScanning,
@@ -54,7 +54,8 @@ class _HomePageState extends State<HomePage> {
               return FloatingActionButton(
                 tooltip: 'Atualizar',
                 child: Icon(Icons.search),
-                onPressed: () => FlutterBlue.instance.startScan(timeout: Duration(seconds: 4)),
+                onPressed: () => FlutterBlue.instance
+                    .startScan(timeout: Duration(seconds: 4)),
               );
             }
           },
@@ -63,7 +64,8 @@ class _HomePageState extends State<HomePage> {
 
   _body() {
     return RefreshIndicator(
-      onRefresh: () => FlutterBlue.instance.startScan(timeout: Duration(seconds: 3)),
+      onRefresh: () =>
+          FlutterBlue.instance.startScan(timeout: Duration(seconds: 3)),
       child: ListView(children: <Widget>[_deviceList()]),
     );
   }

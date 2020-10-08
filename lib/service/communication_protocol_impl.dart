@@ -1,7 +1,6 @@
 import 'package:controle_bluetooth/service/communicaton_protocol.dart';
 
-class CommunicationProtocolImpl implements CommunicationProtocol{
-
+class CommunicationProtocolImpl implements CommunicationProtocol {
   @override
   String decode(String nome, CommandType type, dynamic data) {
     throw UnimplementedError();
@@ -14,13 +13,13 @@ class CommunicationProtocolImpl implements CommunicationProtocol{
     * protocolo de comunicação com o esp32,
     * tipoDoComando!nomeDoDispositivo!dado
     * */
-    var msg = 'rt' + '!' + nome + '!' + _data;
+    var msg = 'Abrir';
     return msg;
   }
 
   @override
   String convertData(CommandType type, String data) {
-    switch(type) {
+    switch (type) {
       case CommandType.air:
         return data == 'true' ? '3' : '2';
       case CommandType.power:
@@ -30,5 +29,4 @@ class CommunicationProtocolImpl implements CommunicationProtocol{
     }
     return 'null';
   }
-
 }
