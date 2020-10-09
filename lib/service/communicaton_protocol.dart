@@ -1,8 +1,6 @@
-
 enum CommandType {
+  ligar,
   air,
-  power,
-  temperature
 }
 
 abstract class CommunicationProtocol {

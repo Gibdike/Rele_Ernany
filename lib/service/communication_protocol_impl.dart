@@ -13,7 +13,7 @@ class CommunicationProtocolImpl implements CommunicationProtocol {
     * protocolo de comunicação com o esp32,
     * tipoDoComando!nomeDoDispositivo!dado
     * */
-    var msg = 'Abrir';
+    var msg = 'Ligou';
     return msg;
   }
 
@@ -22,10 +22,8 @@ class CommunicationProtocolImpl implements CommunicationProtocol {
     switch (type) {
       case CommandType.air:
         return data == 'true' ? '3' : '2';
-      case CommandType.power:
-        return 'null';
-      case CommandType.temperature:
-        return data.toString();
+      case CommandType.ligar:
+        return 'Abrir';
     }
     return 'null';
   }

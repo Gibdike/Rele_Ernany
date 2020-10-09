@@ -107,9 +107,14 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                   trailing: Text('${device.id}'),
                 ),
                 Divider(),
+                SwitchListTile.adaptive(
+                  title: Text('Ligar ar condicionado'),
+                  value: _ligarAr,
+                  onChanged: switchTileOnChanged,
+                ),
                 RaisedButton(
                   child: Text('Ligar relé'),
-                  onPressed: () => _ligarAr,
+                  onPressed: () => liga_rele(),
                 ),
               ],
             ),
@@ -124,8 +129,13 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     setState(() {
       _ligarAr = newValue;
     });
-    _updateLog('Comando para ligar relé $_ligarAr');
+    _updateLog('Comando para ligar ar $_ligarAr');
     _service.sendData(CommandType.air, _ligarAr.toString());
+  }
+
+  void liga_rele() {
+    _updateLog('Enviando para o servidor');
+    _service.sendData(CommandType.ligar, currentTemperature.toString());
   }
 
   Expanded _logDisplay() {
@@ -180,3 +190,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
   }
 }
 
+/*RaisedButton(
+                  child: Text('Ligar relé'),
+                  onPressed: () => _ligarAr,
+                ),*/
