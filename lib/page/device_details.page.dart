@@ -107,10 +107,9 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                   trailing: Text('${device.id}'),
                 ),
                 Divider(),
-                SwitchListTile.adaptive(
-                  title: Text('Ligar relé'),
-                  value: _ligarAr,
-                  onChanged: switchTileOnChanged,
+                RaisedButton(
+                  child: Text('Ligar relé'),
+                  onPressed: () => _ligarAr,
                 ),
               ],
             ),
@@ -180,3 +179,4 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     );
   }
 }
+
